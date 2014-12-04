@@ -47,25 +47,28 @@ unsigned char BLUE[64] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 String inputString = "";
 boolean stringComplete = false;
+unsigned int z,x,y,r,g,b;
 
 void setup()
 {
   Rb.init(); //initialize Rainbowduino driver
   Serial.begin(9600);
   inputString.reserve(200);
+    r = 100;
+    g = 100;
+    b = 100;
 }
 
-unsigned int z,x,y,r,g,b;
 void loop()
 {
 
   if (stringComplete) {
-    Serial.println(inputString);
+    //Serial.println(inputString);
     // expects 255255255 type string
     r = inputString.substring(0,3).toInt();
     g = inputString.substring(3,6).toInt();
     b = inputString.substring(6,9).toInt();
-    Serial.println(inputString.substring(6,9));
+    //Serial.println(inputString.substring(6,9));
 
     inputString = "";
     stringComplete = false;

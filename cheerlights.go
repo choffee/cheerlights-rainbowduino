@@ -48,14 +48,14 @@ func get_colour() (string, error) {
 func main() {
 	c := &goserial.Config{Name: "/dev/ttyUSB1", Baud: 9600}
 	s, _ := goserial.OpenPort(c)
+	time.Sleep(5 * time.Second)
 	//defer s.Close()
 	oldColour := ""
 	for {
 		colour, err := get_colour()
-		colour = "000000000"
 		if err == nil && colour != oldColour {
-			s.Write([]byte(colour))
-			s.Write([]byte("\n"))
+			s.Write([]byte(colour + "\n"))
+			log.Printf("%q", []byte(colour+"\n"))
 			time.Sleep(10 * time.Second)
 			oldColour = colour
 		}
